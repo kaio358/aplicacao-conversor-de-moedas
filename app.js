@@ -28,3 +28,29 @@
       - Para obter a key e fazer requests, você terá que fazer login e escolher
         o plano free. Seus dados de cartão de crédito não serão solicitados.
 */
+
+// Selects 
+const currency_one = document.querySelector('[data-js="currency-one"]')
+const currency_two = document.querySelector('[data-js="currency-two"]')
+const frame = document.createDocumentFragment()
+
+function criador_de_tags() {
+  const moedas = ["BRL","USD","EUR"]
+ 
+
+
+    moedas.forEach(m=>{
+      var option = document.createElement("option")
+      option.value = m
+      option.text = m
+      frame.appendChild(option)
+    })
+    
+    currency_one.appendChild(frame.cloneNode(true))
+  
+    const frame2 = frame.cloneNode(true)
+    currency_two.appendChild(frame2)   
+}
+criador_de_tags()
+
+
