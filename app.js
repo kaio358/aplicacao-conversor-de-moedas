@@ -11,6 +11,7 @@
         no 2º <select> deve ser "BRL";
       - O parágrafo com data-js="converted-value" deve exibir o resultado da 
         conversão de 1 USD para 1 BRL;
+
       - Quando um novo número for inserido no input com 
         data-js="currency-one-times", o parágrafo do item acima deve atualizar 
         seu valor;
@@ -32,25 +33,58 @@
 // Selects 
 const currency_one = document.querySelector('[data-js="currency-one"]')
 const currency_two = document.querySelector('[data-js="currency-two"]')
-const frame = document.createDocumentFragment()
+
+// valores e resultado
+const currency_one_times = document.querySelector('[data-js="currency-one-times"]')
+const  converted_value = document.querySelector('[data-js="converted-value"]')
+
 
 function criador_de_tags() {
+  const frame = document.createDocumentFragment()
+  const frame2 = document.createDocumentFragment()
   const moedas = ["BRL","USD","EUR"]
- 
+  const moedas_op = ["USD" ,"BRL","EUR"]
 
 
-    moedas.forEach(m=>{
+    moedas.forEach((m)=>{
       var option = document.createElement("option")
       option.value = m
       option.text = m
       frame.appendChild(option)
     })
+    moedas_op.forEach((m)=>{
+      var option = document.createElement("option")
+      option.value = m
+      option.text = m
+      frame2.appendChild(option)
+    })
     
-    currency_one.appendChild(frame.cloneNode(true))
+    
+    currency_one.appendChild(frame)
   
-    const frame2 = frame.cloneNode(true)
+    
     currency_two.appendChild(frame2)   
 }
 criador_de_tags()
 
+const converte = {
+  "USDBRL": currency_one_times.value * 4.95,
+  "BRLUSD": (currency_one_times.value)/4.95,
+  
 
+}
+function conversao() {
+  
+  converted_value.innerText = converte[(currency_one.value+currency_two.value)]
+  
+
+
+}
+
+conversao()
+
+
+
+ console.log(typeof (currency_one.value+currency_two.value));
+
+console.log (converte[(currency_one.value+currency_two.value)]);
