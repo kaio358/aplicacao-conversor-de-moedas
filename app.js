@@ -67,15 +67,20 @@ function criador_de_tags() {
 }
 criador_de_tags()
 
-const converte = {
-  "USDBRL": currency_one_times.value * 4.95,
-  "BRLUSD": (currency_one_times.value)/4.95,
-  
 
-}
 function conversao() {
+  const converte = {
+    "USDBRL": currency_one_times.value * 4.95,
+    "BRLUSD": (currency_one_times.value)/4.95,
+    "USDEUR": currency_one_times.value/1.10,
+    "EURUSD": currency_one_times.value*1.10,
+    "BRLEUR": currency_one_times.value/5.49,
+    "EURBRL": currency_one_times.value*5.49
+    
   
-  converted_value.innerText = converte[(currency_one.value+currency_two.value)]
+  }
+  if(currency_one.value == currency_two.value)converted_value.innerText = currency_one_times.value
+  else converted_value.innerText = (converte[(currency_one.value+currency_two.value)].toFixed(2));
   
 
 
@@ -85,6 +90,17 @@ conversao()
 
 
 
- console.log(typeof (currency_one.value+currency_two.value));
 
-console.log (converte[(currency_one.value+currency_two.value)]);
+currency_one.addEventListener('change',()=>{
+   
+    conversao()
+})
+currency_two.addEventListener('change',()=>{
+    
+    conversao()
+})
+
+currency_one_times.addEventListener('input',()=>{
+  
+  conversao()
+})
